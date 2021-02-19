@@ -4,6 +4,7 @@ import GlobalStyles from "./GlobalStyle";
 import Search from './components/Search'
 import { useState, useEffect } from 'react';
 import { getGistForUser, getPublicGists } from './services/gistService'
+import Body from './components/Body';
 
 
 const App = () => {
@@ -18,6 +19,8 @@ const App = () => {
 
   const fetchGists = async (username = '') => {
     let response;
+    setErr(null)
+    setIsLoading(true)
 
     try {
       if (username) {
@@ -25,12 +28,14 @@ const App = () => {
       } else {
         response = await getPublicGists()
       }
+
       setGists(response.data)
 
     } catch (err) {
-      console.log(err)
+      setErr(err.message)
     }
 
+    setIsLoading(false)
   }
 
   return (
@@ -38,6 +43,7 @@ const App = () => {
       <Header>
         <Search fetchCallback={fetchGists} />
       </Header>
+      <Body data={gists} errMsg={err} isLoading={isLoading} />
       <GlobalStyles />
     </Wrapper>
   );
