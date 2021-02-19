@@ -1,6 +1,7 @@
 import React from 'react';
 import Octicon from 'react-octicon'
 import styled from 'styled-components'
+import PropTypes from 'prop-types';
 
 
 const Gist = ({ gist }) => {
@@ -19,7 +20,7 @@ const Gist = ({ gist }) => {
         <Wrapper>
             <Header>
                 <Avatar>
-                    <img src={gist.owner.avatar_url} />
+                    <img src={gist.owner.avatar_url} alt="profile picture" />
                     <span>
                         <a target="_blank" rel="noopener noreferrer" href={gist.owner.html_url}>{gist.owner.login}</a>
                     </span>
@@ -151,7 +152,22 @@ const Separator = styled.hr`
     border-top: 1px solid lightgray;
     width: 100%;
 `
-
+Gist.propTypes = {
+    gist: PropTypes.shape({
+        id: PropTypes.string,
+        comments_url: PropTypes.string,
+        description: PropTypes.string,
+        files: PropTypes.object,
+        forks_url: PropTypes.string,
+        owner: PropTypes.shape({
+            avatar_url: PropTypes.string,
+            html_url: PropTypes.string,
+            login: PropTypes.string,
+        }),
+        updated_at: PropTypes.string,
+        created_at: PropTypes.string,
+    })
+}
 
 
 export default Gist

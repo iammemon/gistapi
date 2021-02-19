@@ -1,7 +1,8 @@
 import React from 'react'
 import Gist from './Gist'
+import PropTypes from 'prop-types';
 
-const GistList = ({ gists=[] }) => {
+const GistList = ({ gists = [] }) => {
 
     const listItems = gists.map(gist => {
         return (<Gist key={gist.id} gist={gist} />)
@@ -13,6 +14,11 @@ const GistList = ({ gists=[] }) => {
         </div>
     )
 
+}
+
+
+GistList.propTypes = {
+    gists: PropTypes.array
 }
 
 export default GistList

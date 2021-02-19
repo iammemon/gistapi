@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import GistList from './GistList';
+import PropTypes from 'prop-types';
+
 
 const Loader = _ => {
     return (<div>
@@ -17,7 +19,7 @@ const Error = ({ msg }) => {
 }
 
 const Body = ({ errMsg, data, isLoading }) => {
-  
+
     //decide which view to load based on props
     const innerBody = _ => {
         if (isLoading) return <Loader />
@@ -42,5 +44,12 @@ const Wrapper = styled.div`
     align-items:center;
     justify-content:center;
 `
+Body.propTypes = {
+    errMsg: PropTypes.string,
+    data: PropTypes.array,
+    isLoading: PropTypes.bool
+}
+
+
 
 export default Body

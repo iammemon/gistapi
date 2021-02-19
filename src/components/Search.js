@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Octicon from 'react-octicon'
 import debounce from 'lodash.debounce'
+import PropTypes from 'prop-types';
 
 const Search = ({ fetchCallback }) => {
 
@@ -51,5 +52,10 @@ const Input = styled.input`
     outline: 0;
   }
 `;
+
+Search.propTypes = {
+  fetchCallback: PropTypes.func
+}
+
 
 export default Search
