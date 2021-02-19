@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Octicon from 'react-octicon'
+import debounce from 'lodash.debounce'
 
-const Search = () => {
+const Search = ({ fetchCallback }) => {
+
+  const [lastSearchQuery, setLastSearchQuery] = useState('')
+
+  const waitUntil = 1000; //ms
+
+  const doSearch = (e) => {
+    const value = e.target.value;
+    // we dont want to search the same thing again
+    if (lastSearchQuery == value) return;
+    setLastSearchQuery(value)
+    fetchCallback(value)
+  }
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input placeholder="Search Gists for the username" onChange={debounce(doSearch, waitUntil)} />
       </InputBox>
     </Wrapper>
   )
