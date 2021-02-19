@@ -26,7 +26,7 @@ const Body = ({ errMsg, data, isLoading }) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper data-testid="body">
             {innerBody()}
         </Wrapper>
     )
